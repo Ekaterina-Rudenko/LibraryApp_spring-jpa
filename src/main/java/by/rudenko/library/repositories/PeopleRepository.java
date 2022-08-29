@@ -2,7 +2,6 @@ package by.rudenko.library.repositories;
 
 import by.rudenko.library.models.Person;
 import java.util.List;
-import javax.persistence.criteria.CriteriaBuilder.In;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

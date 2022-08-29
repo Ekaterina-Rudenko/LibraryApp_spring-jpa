@@ -1,5 +1,6 @@
 package by.rudenko.library.models;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,8 @@ public class Book {
   @ManyToOne
   @JoinColumn(name = "person_id", referencedColumnName = "id")
   private Person owner;
+
+  private Date
 
   public Book(int id, String title, String author, int year) {
     this.title = title;
