@@ -1,6 +1,7 @@
 package by.rudenko.library.models;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,12 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "book")
 public class Book {
+
   @Id
   @Column(name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,12 +42,18 @@ public class Book {
   @JoinColumn(name = "person_id", referencedColumnName = "id")
   private Person owner;
 
-  private Date
+  @Column(name = "date")
+  @Temporal(TemporalType.TIMESTAMP)
+  private LocalDate date;
 
-  public Book(int id, String title, String author, int year) {
+  @Transient
+  private boolean isExpired;
+
+  public Book(int id, String title, String author, int year, LocalDate date) {
     this.title = title;
     this.author = author;
     this.year = year;
+    this.date = date;
   }
 
   public Book() {
@@ -86,5 +97,24 @@ public class Book {
 
   public void setOwner(Person owner) {
     this.owner = owner;
+  }
+
+  public LocalDate getDate() {
+    return date;
+  }
+
+  public void setDate(LocalDate date) {
+    this.date = date;
+  }
+
+  public boolean isExpired() {
+    /*LocalDate deadline = this.date.plusDays(10);
+    return (LocalDate.now().compareTo(deadline) <= 0);*/
+    long difference = ChronoUnit.DAYS.between(LocalDate.now(), this.date);
+    return difference <= 10;
+  }
+
+  public void setExpired(boolean expired) {
+    isExpired = expired;
   }
 }
