@@ -49,11 +49,10 @@ public class Book {
   @Transient
   private boolean isExpired;
 
-  public Book(int id, String title, String author, int year, LocalDate date) {
+  public Book(int id, String title, String author, int year) {
     this.title = title;
     this.author = author;
     this.year = year;
-    this.date = date;
   }
 
   public Book() {

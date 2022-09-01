@@ -4,6 +4,8 @@ import by.rudenko.library.models.Book;
 import by.rudenko.library.models.Person;
 import by.rudenko.library.repositories.BooksRepository;
 import by.rudenko.library.repositories.PeopleRepository;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -58,8 +60,15 @@ public class PeopleService {
 
   public List<Book> getBooksByPersonId(int id) {
     Optional<Person> person = peopleRepository.findById(id);
-    if(person.isPresent()){
+    if (person.isPresent()) {
       Hibernate.initialize(person.get().getBooks());
+
+      person.get().getBooks().forEach(book -> {
+        long difference = ChronoUnit.DAYS.between(LocalDate.now(), book.getDate());
+        if (difference > 10) {
+          book.setExpired(true);
+        }
+      });
       return person.get().getBooks();
     } else {
       return Collections.emptyList();
