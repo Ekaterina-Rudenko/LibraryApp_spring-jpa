@@ -39,8 +39,8 @@ public class BookService {
     }
   }
 
-  public Optional<Book> searchByPartTitle(String partTitle) {
-    return booksRepository.findByTitleStartingWith(partTitle).stream().findFirst();
+  public List<Book> searchByPartTitle(String partTitle) {
+    return booksRepository.findByTitleStartingWith(partTitle);
   }
 
 

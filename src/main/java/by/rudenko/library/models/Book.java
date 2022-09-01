@@ -107,10 +107,7 @@ public class Book {
   }
 
   public boolean isExpired() {
-    /*LocalDate deadline = this.date.plusDays(10);
-    return (LocalDate.now().compareTo(deadline) <= 0);*/
-    long difference = ChronoUnit.DAYS.between(LocalDate.now(), this.date);
-    return difference <= 10;
+    return isExpired;
   }
 
   public void setExpired(boolean expired) {
