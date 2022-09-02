@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Person</title>
+  <title>Search</title>
 </head>
 <body>
 
 <div>
   <form th:method="POST" th:action="@{/books/search}">
     <label for="query">Enter title:</label>
-    <input type="text" th:field="*{query}" id="query">
+    <input type="text" id="query" name="query"/>
     <br/>
     <input type="submit" value="Search!"/>
   </form>
