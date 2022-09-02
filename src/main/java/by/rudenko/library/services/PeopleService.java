@@ -6,9 +6,12 @@ import by.rudenko.library.repositories.BooksRepository;
 import by.rudenko.library.repositories.PeopleRepository;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,8 +67,9 @@ public class PeopleService {
       Hibernate.initialize(person.get().getBooks());
 
       person.get().getBooks().forEach(book -> {
-        long difference = ChronoUnit.DAYS.between(LocalDate.now(), book.getDate());
-        if (difference > 10) {
+        long diffInMillies = Math.abs(new Date().getTime() - book.getDate().getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        if (diff > 10) {
           book.setExpired(true);
         }
       });

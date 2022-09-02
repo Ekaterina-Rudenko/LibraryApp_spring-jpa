@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PersonDAO {
 
-  private final JdbcTemplate jdbcTemplate;
+/*  private final JdbcTemplate jdbcTemplate;
 
   @Autowired
   public PersonDAO(JdbcTemplate jdbcTemplate) {
@@ -53,5 +53,5 @@ public class PersonDAO {
     String SQL = "SELECT * FROM Book WHERE person_id = ?";
    return jdbcTemplate.query(SQL,  new Object[]{id},
         new BeanPropertyRowMapper<>(Book.class));
-  }
+  }*/
 }

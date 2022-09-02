@@ -3,7 +3,7 @@ package by.rudenko.library.services;
 import by.rudenko.library.models.Book;
 import by.rudenko.library.models.Person;
 import by.rudenko.library.repositories.BooksRepository;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +71,7 @@ public class BookService {
     booksRepository.findById(id).ifPresent(
         book -> {
           book.setOwner(person);
-          book.setDate(LocalDate.now());
+          book.setDate(new Date());
         }
     );
   }

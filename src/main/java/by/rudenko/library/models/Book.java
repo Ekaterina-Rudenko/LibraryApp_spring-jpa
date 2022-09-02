@@ -1,7 +1,6 @@
 package by.rudenko.library.models;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,15 +43,16 @@ public class Book {
 
   @Column(name = "date")
   @Temporal(TemporalType.TIMESTAMP)
-  private LocalDate date;
+  private Date date;
 
   @Transient
   private boolean isExpired;
 
-  public Book(int id, String title, String author, int year) {
+  public Book(int id, String title, String author, int year, Date date) {
     this.title = title;
     this.author = author;
     this.year = year;
+    this.date = date;
   }
 
   public Book() {
@@ -98,11 +98,11 @@ public class Book {
     this.owner = owner;
   }
 
-  public LocalDate getDate() {
+  public Date getDate() {
     return date;
   }
 
-  public void setDate(LocalDate date) {
+  public void setDate(Date date) {
     this.date = date;
   }
 
